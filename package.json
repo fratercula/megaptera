@@ -1,0 +1,20 @@
+{
+  "name": "megaptera",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fratercula/megaptera.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fratercula/megaptera/issues"
+  },
+  "homepage": "https://github.com/fratercula/megaptera#readme"
+}

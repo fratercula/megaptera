@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title> Humpback </title>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/requirejs@2.3.6/require.js"></script>
+<script src="https://unpkg.com/@fratercula/humpback@0.1.1/lib/index.js"></script>
+<script>
+var config = {
+  packages: {
+    global: './dist/global.js',
+    'humpback-app': './index.js',
+  },
+  routes: [
+    {
+      path: '/',
+      components: [
+        [
+          ['humpback-app'],
+        ],
+      ],
+    },
+  ],
+}
+
+const humpback = new window.Humpback(config)
+humpback.start()
+</script>
+
+</body>
+</html>
