@@ -3,23 +3,30 @@
 <head>
 <meta charset="UTF-8" />
 <title> Humpback </title>
+<link rel="stylesheet" href="https://unpkg.com/antd@3.26.0/dist/antd.min.css" />
 </head>
 <body>
 <div id="root"></div>
 <script src="https://unpkg.com/requirejs@2.3.6/require.js"></script>
-<script src="https://unpkg.com/@fratercula/humpback@0.1.1/lib/index.js"></script>
+<script src="http://127.0.0.1:2333/lib/index.js"></script>
 <script>
 var config = {
   packages: {
-    global: './dist/global.js',
-    'humpback-app': './index.js',
+    moment: 'https://unpkg.com/moment@2.24.0/moment.js',
+    antd: 'https://unpkg.com/antd@3.26.0/dist/antd-with-locales.min.js',
+    // global: './global.js',
+    // entry: './index.js',
+    global: 'http://127.0.0.1:2333/docs/dist/global.js',
+    a: 'http://127.0.0.1:2333/docs/dist/a.js',
   },
+  menu: [],
   routes: [
     {
       path: '/',
       components: [
         [
-          ['humpback-app'],
+          // ['entry'],
+          ['a'],
         ],
       ],
     },

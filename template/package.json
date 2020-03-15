@@ -1,0 +1,8 @@
+{
+  "name": "megaptera",
+  "version": "0.1.0",
+  "scripts": {
+    "start": "falco -c -d",
+    "build": "falco -c"
+  }
+}
