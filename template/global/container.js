@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Resizable } from 're-resizable'
+import { Global } from './devtools'
 import classes from './index.module.less'
 
 export default class extends Component {
   state = {
-    width: 480,
-    height: 720,
+    width: 460,
+    height: 640,
     hover: false,
   }
 
@@ -14,7 +15,7 @@ export default class extends Component {
   }
 
   render() {
-    const { Routes } = this.props
+    const { Routes, store } = this.props
     const { width, height, hover } = this.state
 
     const Handle = ({ type }) => (
@@ -61,6 +62,7 @@ export default class extends Component {
         >
           <Routes />
         </Resizable>
+        <Global store={store} />
         <div className={classes.size}>{width} x {height}</div>
       </div>
     )
