@@ -40,4 +40,4 @@ class Megaptera extends Component {
   }
 }
 
-export default connect(Megaptera)
+export default connect('name')(Megaptera)

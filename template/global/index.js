@@ -1,10 +1,5 @@
-import React from 'react'
+import container from './container'
 
 export default {
-  container: ({ Routes }) => (
-    <div>
-      <h1>???</h1>
-      <Routes />
-    </div>
-  )
+  container,
 }

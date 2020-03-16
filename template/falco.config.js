@@ -31,11 +31,11 @@ const externals = [
 module.exports = {
   injectScript: false,
   entry: {
-    index: resolve(__dirname, './index.js'),
+    entry: resolve(__dirname, './index.js'),
     global: resolve(__dirname, './global/index.js'),
   },
   output: {
-    library: 'entry',
+    library: '[name]',
     libraryTarget: 'amd',
     libraryExport: 'default',
   },
