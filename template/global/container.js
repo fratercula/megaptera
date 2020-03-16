@@ -61,6 +61,7 @@ export default class extends Component {
         >
           <Routes />
         </Resizable>
+        <div className={classes.size}>{width} x {height}</div>
       </div>
     )
   }
