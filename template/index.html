@@ -13,17 +13,13 @@ var config = {
   packages: {
     global: './global.js',
     entry: './entry.js',
+    test: './test.js',
   },
-  routes: [
-    {
-      path: '/',
-      components: [
-        [
-          ['entry'],
-        ],
-      ],
-    },
-  ],
+  page: {
+    path: '/',
+    entry: 'entry',
+    test: 'test',
+  },
 }
 
 const humpback = new window.Humpback(config)

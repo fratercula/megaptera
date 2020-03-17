@@ -21,16 +21,12 @@ const externals = [
     root: 'nycticorax',
     amd: 'nycticorax',
   },
-  {
-    name: 'antd',
-    root: 'antd',
-    amd: 'antd',
-  },
 ]
 
 module.exports = {
   injectScript: false,
   entry: {
+    test: resolve(__dirname, './global/component.js'),
     entry: resolve(__dirname, './index.js'),
     global: resolve(__dirname, './global/index.js'),
   },

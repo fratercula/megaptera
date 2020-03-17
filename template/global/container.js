@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
 import { Resizable } from 're-resizable'
 import { Global } from './devtools'
 import classes from './index.module.less'
@@ -15,7 +16,8 @@ export default class extends Component {
   }
 
   render() {
-    const { Routes, store } = this.props
+    const { Routes, store, CONFIG, componentCreator } = this.props
+    const { entry, test, path } = CONFIG.page
     const { width, height, hover } = this.state
 
     const Handle = ({ type }) => (
@@ -24,7 +26,6 @@ export default class extends Component {
         className={`${classes.handle}${type === 'bottom' ? ` ${classes.bottom}` : ''}`}
       />
     )
-
     const Corner = () => (
       <div
         className={classes.corner}
@@ -34,8 +35,10 @@ export default class extends Component {
         <div />
       </div>
     )
+    const EntryComponent = componentCreator(entry)
+    const TestComponent = componentCreator(test)
 
-    return (
+    const component = () => (
       <div className={classes.main}>
         <Resizable
           className={classes.resize}
@@ -60,11 +63,24 @@ export default class extends Component {
             bottomRight: (<Corner />),
           }}
         >
-          <Routes />
+          <EntryComponent />
         </Resizable>
         <Global store={store} />
+        <TestComponent />
         <div className={classes.size}>{width} x {height}</div>
       </div>
+    )
+
+    const routeComponent = (
+      <Route
+        exact
+        path={path}
+        component={component}
+      />
+    )
+
+    return (
+      <Routes config={routeComponent} />
     )
   }
 }
