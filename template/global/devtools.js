@@ -1,10 +1,26 @@
 import React, { Component } from 'react'
 import JSONTree from 'react-json-tree'
+import Nycticorax from 'nycticorax'
 import classes from './index.module.less'
 
-export default class extends Component {
+const {
+  createStore,
+  connect,
+  dispatch,
+  getStore,
+} = new Nycticorax()
+
+createStore({ data: '666' })
+
+ class X extends Component {
+  static getValue = () => getStore().data
+
+  static setValue = (value) => {
+    dispatch({ data: value })
+  }
+
   render() {
-    const { store } = this.props
+    const { store, data } = this.props
     return (
       <div className={classes.code}>
         <JSONTree
@@ -30,7 +46,10 @@ export default class extends Component {
             base0F: '#a3685a'
           }}
         />
+        <p>{data}</p>
       </div>
     )
   }
 }
+
+export default connect('data')(X)

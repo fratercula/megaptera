@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { Resizable } from 're-resizable'
-import Global from './devtools'
 import classes from './index.module.less'
 
 class Resize extends Component {
@@ -61,15 +60,15 @@ class Resize extends Component {
 }
 
 export default class extends Component {
-  shouldComponentUpdate() {
+  shouldComponentUpdate(props) {
     return false
   }
 
   render() {
-    const { Routes, store, CONFIG, componentCreator } = this.props
-    const { entry, test, path } = CONFIG.page
+    const { Routes, CONFIG, componentCreator } = this.props
+    const { entry, devtools, path } = CONFIG.page
     const EntryComponent = componentCreator(entry)
-    const TestComponent = componentCreator(test)
+    const DevComponent = componentCreator(devtools)
 
     const C = () => (
       <Resize>
@@ -88,10 +87,7 @@ export default class extends Component {
     return (
       <>
         <Routes config={routeComponent} />
-        <div className={classes.view}>
-          <Global store={store} />
-          <TestComponent />
-        </div>
+        <DevComponent />
       </>
     )
   }

@@ -26,7 +26,7 @@ const externals = [
 module.exports = {
   injectScript: false,
   entry: {
-    test: resolve(__dirname, './global/component.js'),
+    devtools: resolve(__dirname, './global/devtools.js'),
     entry: resolve(__dirname, './index.js'),
     global: resolve(__dirname, './global/index.js'),
   },
