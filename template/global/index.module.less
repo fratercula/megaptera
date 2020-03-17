@@ -105,6 +105,7 @@
   right: 20px;
   top: 20px;
   min-width: 300px;
+  max-width: 50%;
   border: 1px solid #eee;
   border-radius: 3px;
   transition: all .3s ease;
@@ -162,7 +163,7 @@
 }
 .code {
   font-family: 'Courier New', Courier, monospace;
-  padding: 0 10px 20px;
+  padding: 0 10px 10px;
 }
 .error {
   height: 100%;
@@ -182,15 +183,34 @@
   }
 }
 
-.dispatch {
+.form {
+  margin: 20px 20px 0;
+  font-size: 13px;
+
+  input, textarea {
+    border: 1px solid #ddd;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 14px;
+    width: 100%;
+    display: block;
+  }
+
+  textarea {
+    max-width: 100%;
+    min-width: 100%;
+    white-space: pre-wrap;
+    min-height: 50px;
+  }
+}
+
+.button {
   background: #4c5866;
   color: #fff;
-  margin: 0 auto -14px;
   width: 100px;
+  margin: 20px;
   text-align: center;
-  cursor: pointer;
   padding: 7px 0;
-  text-transform: uppercase;
-  border-radius: 20px;
-  font-size: 12px;
+  border-radius: 3px;
+  cursor: pointer;
 }

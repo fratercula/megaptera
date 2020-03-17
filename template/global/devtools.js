@@ -96,7 +96,23 @@ createStore({ data: '666' })
         >
           <JSONTree data={rest} theme={theme} />
         </div>
-        <div className={classes.dispatch}>dispatch</div>
+        <div className={classes.header}>
+          <div>dispatch</div>
+        </div>
+
+        <div className={classes.form}>
+          <input placeholder="Event Name" />
+        </div>
+
+        <div className={classes.form}>
+          <input placeholder="Params" />
+        </div>
+
+        <div className={classes.form}>
+          <textarea value={1} disabled placeholder="Result" />
+        </div>
+
+        <div className={classes.button}>Confirm</div>
       </div>
     )
   }
