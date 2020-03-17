@@ -1,14 +1,22 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { Resizable } from 're-resizable'
-import { Global } from './devtools'
+import Global from './devtools'
 import classes from './index.module.less'
 
-export default class extends Component {
+class Resize extends Component {
   state = {
     width: 460,
     height: 640,
     hover: false,
+  }
+
+  onSize = (e, direction, ref, d) => {
+    const { width, height } = this.state
+    this.setState({
+      width: width + d.width,
+      height: height + d.height,
+    })
   }
 
   onHover = (hover) => {
@@ -16,8 +24,7 @@ export default class extends Component {
   }
 
   render() {
-    const { Routes, store, CONFIG, componentCreator } = this.props
-    const { entry, test, path } = CONFIG.page
+    const { children } = this.props
     const { width, height, hover } = this.state
 
     const Handle = ({ type }) => (
@@ -35,52 +42,57 @@ export default class extends Component {
         <div />
       </div>
     )
-    const EntryComponent = componentCreator(entry)
-    const TestComponent = componentCreator(test)
 
-    const component = () => (
+    return (
       <div className={classes.main}>
         <Resizable
           className={classes.resize}
-          size={{
-            width,
-            height,
-          }}
-          enable={{
-            right: true,
-            bottom: true,
-            bottomRight: true,
-          }}
-          onResizeStop={(e, direction, ref, d) => {
-            this.setState({
-              width: width + d.width,
-              height: height + d.height,
-            })
-          }}
-          handleComponent={{
-            right: (<Handle />),
-            bottom: (<Handle type="bottom" />),
-            bottomRight: (<Corner />),
-          }}
+          size={{ width, height }}
+          enable={{ right: true, bottom: true, bottomRight: true }}
+          onResizeStop={this.onSize}
+          handleComponent={{ right: (<Handle />), bottom: (<Handle type="bottom" />), bottomRight: (<Corner />) }}
         >
-          <EntryComponent />
+          {children}
         </Resizable>
-        <Global store={store} />
-        <TestComponent />
         <div className={classes.size}>{width} x {height}</div>
       </div>
+    )
+  }
+}
+
+export default class extends Component {
+  shouldComponentUpdate() {
+    return false
+  }
+
+  render() {
+    const { Routes, store, CONFIG, componentCreator } = this.props
+    const { entry, test, path } = CONFIG.page
+    const EntryComponent = componentCreator(entry)
+    const TestComponent = componentCreator(test)
+
+    const C = () => (
+      <Resize>
+        <EntryComponent />
+      </Resize>
     )
 
     const routeComponent = (
       <Route
         exact
         path={path}
-        component={component}
+        component={C}
       />
     )
 
     return (
-      <Routes config={routeComponent} />
+      <>
+        <Routes config={routeComponent} />
+        <div className={classes.view}>
+          <Global store={store} />
+          <TestComponent />
+        </div>
+      </>
     )
   }
 }

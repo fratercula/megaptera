@@ -7,7 +7,7 @@
 <body>
 <div id="root"></div>
 <script src="https://unpkg.com/requirejs@2.3.6/require.js"></script>
-<script src="https://fratercula.github.io/humpback/dist/index.js"></script>
+<script src="https://unpkg.com/@fratercula/humpback@0.1.2/lib/index.js"></script>
 <script>
 var config = {
   packages: {
@@ -20,6 +20,16 @@ var config = {
     entry: 'entry',
     test: 'test',
   },
+  routes: [
+    {
+      path: '/',
+      components: [
+        [
+          ['entry'], ['test'],
+        ],
+      ],
+    },
+  ],
 }
 
 const humpback = new window.Humpback(config)

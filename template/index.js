@@ -16,7 +16,7 @@ class Megaptera extends Component {
     return getStore().name
   }
 
-  static async updateName(name) {
+  static async setName(name) {
     await new Promise((r) => setTimeout(r, 1000))
     dispatch({ name }, true)
   }
@@ -29,12 +29,22 @@ class Megaptera extends Component {
     name: '',
   }
 
+  // shouldComponentUpdate() {
+  //   return false
+  // }
+
+  onClick = () => {
+    // const s = this.props.dispatch('global', 'getName')
+    this.props.dispatch('global', 'setName', `${Math.random()}`)
+  }
+
   render() {
-    const { name } = this.props
+    const { name, store } = this.props
     return (
       <div>
-        current name:
-        {name}
+        <input value={name} />
+        <button onClick={this.onClick}>{store.name}</button>
+        <input />
       </div>
     )
   }
