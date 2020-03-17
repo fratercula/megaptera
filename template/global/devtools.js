@@ -43,6 +43,37 @@ createStore({ data: '666' })
   state = {
     current: 'global',
     active: false,
+    event: undefined,
+    params: undefined,
+    result: undefined,
+  }
+
+  onInput = (type, e) => {
+    this.setState({ [type]: e.target.value })
+  }
+
+  onConfirm = async () => {
+    const { event, params } = this.state
+
+    if (!event) {
+      return
+    }
+
+    this.setState({ result: '' })
+
+    let value = params
+    try {
+      value = eval(`s = ${params}`)
+    } catch (e) {}
+
+    let result
+    try {
+      result = await this.props.dispatch('entry', event, value)
+    } catch (e) {
+      result = `Error: ${e.message || e}`
+    }
+
+    this.setState({ result })
   }
 
   render() {
@@ -58,7 +89,7 @@ createStore({ data: '666' })
       staticContext,
       ...rest
     } = this.props
-    const { current, active } = this.state
+    const { current, active, result } = this.state
 
     return (
       <div className={`${classes.view}${active ? ` ${classes.active}` : ''}`}>
@@ -101,18 +132,18 @@ createStore({ data: '666' })
         </div>
 
         <div className={classes.form}>
-          <input placeholder="Event Name" />
+          <input onInput={e => this.onInput('event', e)} placeholder="Event Name" />
         </div>
 
         <div className={classes.form}>
-          <input placeholder="Params" />
+          <textarea onInput={e => this.onInput('params', e)} placeholder="Params" />
         </div>
 
         <div className={classes.form}>
-          <textarea value={1} disabled placeholder="Result" />
+          <textarea value={result} disabled placeholder="Result" />
         </div>
 
-        <div className={classes.button}>Confirm</div>
+        <div onClick={this.onConfirm} className={classes.button}>Confirm</div>
       </div>
     )
   }
