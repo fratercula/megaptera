@@ -1,11 +1,16 @@
 module.exports = (dispatch = () => null, getStore = () => null) => ({
-  packages: {
-    moment: {
-      url: 'https://unpkg.com/moment@2.24.0/moment.js',
-      amd: 'moment',
-      root: 'moment',
+  name: 'component-flow',
+  css: [
+    'https://unpkg.com/antd@3.26.0/dist/antd.min.css',
+  ],
+  packages: [
+    {
+      name: 'antd',
+      url: ['https://unpkg.com/moment@2.24.0/moment.js', 'https://unpkg.com/antd@3.26.0/dist/antd-with-locales.min.js'],
+      amd: 'antd',
+      root: 'antd',
     },
-  },
+  ],
   store: {
     name: 'aksdj4',
   },
@@ -18,7 +23,7 @@ module.exports = (dispatch = () => null, getStore = () => null) => ({
       return getStore().name
     },
   },
-  component: {
+  devComponent: {
     name: 'dev-component',
     store: {
       message: '666',

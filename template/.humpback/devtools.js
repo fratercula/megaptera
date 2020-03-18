@@ -33,7 +33,7 @@ const {
 } = new Nycticorax()
 
 const { component } = config(dispatch, getStore)
-const { store, dispatcher } = component || {}
+const { name, store, dispatcher } = component || {}
 
 if (component) {
   createStore(store)
@@ -102,12 +102,18 @@ class X extends Component {
           >
             global
           </div>
-          <div
-            onClick={() => this.setState({ current: 'devtools' })}
-            className={current === 'devtools' ? classes.active : ''}
-          >
-            {NAME}
-          </div>
+          {
+            name
+              ? (
+                <div
+                  onClick={() => this.setState({ current: 'devtools' })}
+                  className={current === 'devtools' ? classes.active : ''}
+                >
+                  {name}
+                </div>
+              )
+              : null
+          }
           <div
             onClick={() => this.setState({ active: false })}
             className={classes.close}
@@ -148,8 +154,8 @@ class X extends Component {
 }
 
 if (component) {
-  Object.keys(dispatcher).forEach((name) => {
-    X[name] = dispatcher[name]
+  Object.keys(dispatcher).forEach((e) => {
+    X[e] = dispatcher[e]
   })
 }
 

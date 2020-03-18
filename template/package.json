@@ -1,5 +1,5 @@
 {
-  "name": "megaptera",
+  "name": "component-flow",
   "version": "0.1.0",
   "scripts": {
     "prestart": "cd .humpback && NODE_ENV=PRE falco -c -o dist",
