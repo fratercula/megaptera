@@ -1,4 +1,7 @@
-const { resolve } = require('path');
+const { resolve } = require('path')
+const config = require('../config')
+
+const { name, packages = [] } = config()
 
 const externals = [
   {
@@ -31,7 +34,7 @@ if (env === 'PRE') {
   mode = 'production'
   entry = {
     devtools: resolve(__dirname, './devtools.js'),
-    global: resolve(__dirname, './index.js'),
+    global: resolve(__dirname, './global.js'),
   }
 }
 
@@ -48,7 +51,7 @@ if (env === 'BUILD') {
 module.exports = {
   mode,
   injectScript: false,
-  contentBase: resolve(__dirname),
+  contentBase: resolve(__dirname, '../'),
   entry,
   output: {
     library: '[name]',

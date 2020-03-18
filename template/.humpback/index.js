@@ -1,14 +1,15 @@
-import container from './container'
-import loading from './loading'
-import error from './error'
-import config from '../config'
-
-const { store, dispatcher } = config()
-
-export default {
-  error,
-  loading,
-  store,
-  dispatcher,
-  container,
+var config = {
+  packages: {
+    global: './.humpback/dist/global.js',
+    devtools: './.humpback/dist/devtools.js',
+    entry: './entry.js',
+  },
+  page: {
+    path: '/',
+    entry: 'entry',
+    devtools: 'devtools',
+  },
 }
+var humpback = new window.Humpback(config)
+
+humpback.start()

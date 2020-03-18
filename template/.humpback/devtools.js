@@ -32,8 +32,8 @@ const {
   getStore,
 } = new Nycticorax()
 
-const { component } = config(dispatch, getStore)
-const { name, store, dispatcher } = component || {}
+const { testComponent } = config(dispatch, getStore)
+const { name, store, dispatcher } = testComponent || {}
 
 if (component) {
   createStore(store)

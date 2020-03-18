@@ -1,8 +1,5 @@
 module.exports = (dispatch = () => null, getStore = () => null) => ({
   name: 'component-flow',
-  css: [
-    'https://unpkg.com/antd@3.26.0/dist/antd.min.css',
-  ],
   packages: [
     {
       name: 'antd',
@@ -23,7 +20,7 @@ module.exports = (dispatch = () => null, getStore = () => null) => ({
       return getStore().name
     },
   },
-  devComponent: {
+  testComponent: {
     name: 'dev-component',
     store: {
       message: '666',
