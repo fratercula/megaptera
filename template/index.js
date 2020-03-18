@@ -39,7 +39,7 @@ class Megaptera extends Component {
     const { name, store } = this.props
     return (
       <div>
-        <input value={name} />
+        <p>{name}</p>
         <button onClick={this.onClick}>{store.name}</button>
         <input />
       </div>

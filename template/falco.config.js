@@ -22,14 +22,34 @@ const externals = [
     amd: 'nycticorax',
   },
 ]
+const env = process.env.NODE_ENV
+
+let entry = {}
+let mode = 'development'
+
+if (env === 'PRE') {
+  mode = 'production'
+  entry = {
+    devtools: resolve(__dirname, './global/devtools.js'),
+    global: resolve(__dirname, './global/index.js'),
+  }
+}
+
+if (env === 'DEV' || env === 'BUILD') {
+  entry = {
+    entry: resolve(__dirname, './index.js'),
+  }
+}
+
+if (env === 'BUILD') {
+  mode = 'production'
+}
 
 module.exports = {
+  mode,
   injectScript: false,
-  entry: {
-    devtools: resolve(__dirname, './global/devtools.js'),
-    entry: resolve(__dirname, './index.js'),
-    global: resolve(__dirname, './global/index.js'),
-  },
+  contentBase: './',
+  entry,
   output: {
     library: '[name]',
     libraryTarget: 'amd',

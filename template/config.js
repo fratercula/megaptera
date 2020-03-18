@@ -1,4 +1,11 @@
-export default (dispatch = () => null, getStore = () => null) => ({
+module.exports = (dispatch = () => null, getStore = () => null) => ({
+  packages: {
+    moment: {
+      url: 'https://unpkg.com/moment@2.24.0/moment.js',
+      amd: 'moment',
+      root: 'moment',
+    },
+  },
   store: {
     name: 'aksdj4',
   },
