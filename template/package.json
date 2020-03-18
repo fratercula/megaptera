@@ -2,7 +2,8 @@
   "name": "megaptera",
   "version": "0.1.0",
   "scripts": {
-    "start": "NODE_ENV=PRE falco -c -o global/dist && NODE_ENV=DEV falco -c",
-    "build": "NODE_ENV=BUILD falco -c"
+    "prestart": "cd .humpback && NODE_ENV=PRE falco -c -o dist",
+    "start": "cd .humpback && NODE_ENV=DEV falco -c",
+    "build": "cd .humpback && NODE_ENV=BUILD falco -c"
   }
 }

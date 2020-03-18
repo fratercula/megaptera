@@ -30,14 +30,14 @@ let mode = 'development'
 if (env === 'PRE') {
   mode = 'production'
   entry = {
-    devtools: resolve(__dirname, './global/devtools.js'),
-    global: resolve(__dirname, './global/index.js'),
+    devtools: resolve(__dirname, './devtools.js'),
+    global: resolve(__dirname, './index.js'),
   }
 }
 
 if (env === 'DEV' || env === 'BUILD') {
   entry = {
-    entry: resolve(__dirname, './index.js'),
+    entry: resolve(__dirname, '../index.js'),
   }
 }
 
@@ -48,7 +48,7 @@ if (env === 'BUILD') {
 module.exports = {
   mode,
   injectScript: false,
-  contentBase: './',
+  contentBase: resolve(__dirname),
   entry,
   output: {
     library: '[name]',
