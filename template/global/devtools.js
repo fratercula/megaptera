@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import JSONTree from 'react-json-tree'
 import Nycticorax from 'nycticorax'
+import config from '../config'
 import classes from './index.module.less'
 
 const theme = {
@@ -31,15 +32,14 @@ const {
   getStore,
 } = new Nycticorax()
 
-createStore({ data: '666' })
+const { component } = config(dispatch, getStore)
+const { store, dispatcher } = component || {}
 
- class X extends Component {
-  static getValue = () => getStore().data
+if (component) {
+  createStore(store)
+}
 
-  static setValue = (value) => {
-    dispatch({ data: value })
-  }
-
+class X extends Component {
   state = {
     current: 'global',
     active: false,
@@ -58,8 +58,6 @@ createStore({ data: '666' })
     if (!event) {
       return
     }
-
-    this.setState({ result: '' })
 
     let value = params
     try {
@@ -140,7 +138,7 @@ createStore({ data: '666' })
         </div>
 
         <div className={classes.form}>
-          <textarea value={result} disabled placeholder="Result" />
+          <textarea value={result || ''} disabled placeholder="Result" />
         </div>
 
         <div onClick={this.onConfirm} className={classes.button}>Confirm</div>
@@ -149,4 +147,10 @@ createStore({ data: '666' })
   }
 }
 
-export default connect('data')(X)
+if (component) {
+  Object.keys(dispatcher).forEach((name) => {
+    X[name] = dispatcher[name]
+  })
+}
+
+export default connect(...Object.keys(store || {}))(X)

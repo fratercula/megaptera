@@ -29,13 +29,10 @@ class Megaptera extends Component {
     name: '',
   }
 
-  // shouldComponentUpdate() {
-  //   return false
-  // }
-
   onClick = () => {
     // const s = this.props.dispatch('global', 'getName')
     this.props.dispatch('global', 'setName', `${Math.random()}`)
+    this.props.dispatch('devtools', 'setMessage', `${Math.random()}`)
   }
 
   render() {
