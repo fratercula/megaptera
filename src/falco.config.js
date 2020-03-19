@@ -1,6 +1,6 @@
-const { resolve } = require('path')
+const { tmpDir } = require('./config')
 
-const externals = [
+const defaultExternals = [
   {
     name: 'react',
     root: 'React',
@@ -22,39 +22,19 @@ const externals = [
     amd: 'nycticorax',
   },
 ]
-const env = process.env.NODE_ENV
 
-let entry = {}
-let mode = 'development'
-
-if (env === 'PRE') {
-  mode = 'production'
-  entry = {
-    devtools: resolve(__dirname, './devtools.js'),
-    global: resolve(__dirname, './global.js'),
+module.exports = (mode, entry, externals) => {
+  return {
+    mode,
+    injectScript: false,
+    contentBase: tmpDir,
+    entry,
+    output: {
+      library: '[name]',
+      libraryTarget: 'amd',
+      libraryExport: 'default',
+    },
+    targets: { esmodules: true },
+    externals: defaultExternals.concat(externals),
   }
-}
-
-if (env === 'DEV' || env === 'BUILD') {
-  entry = {
-    entry: resolve(__dirname, '../index.js'),
-  }
-}
-
-if (env === 'BUILD') {
-  mode = 'production'
-}
-
-module.exports = {
-  mode,
-  injectScript: false,
-  contentBase: resolve(__dirname, '../'),
-  entry,
-  output: {
-    library: '[name]',
-    libraryTarget: 'amd',
-    libraryExport: 'default',
-  },
-  targets: { esmodules: true },
-  externals,
 }
