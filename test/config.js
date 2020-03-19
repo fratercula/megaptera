@@ -7,7 +7,7 @@ module.exports.externals = [
 ]
 
 module.exports.container = {
-  name: 'pkg-name',
+  name: 'componet-dev',
   store: {
     name: 'humpback',
   },
@@ -23,7 +23,7 @@ module.exports.container = {
 }
 
 module.exports.testComponent = (dispatch, getStore) => ({
-  name: 'test-name',
+  name: 'componet-test',
   store: {
     message: 'test',
   },

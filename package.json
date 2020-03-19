@@ -1,21 +1,29 @@
 {
   "name": "megaptera",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.1.0",
+  "description": "RequireJS(AMD) + React",
   "main": "index.js",
   "scripts": {
-    "start": "falco -c -d",
-    "build": "falco -c"
+    "start": "cd template && node ../index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fratercula/megaptera.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "react",
+    "amd",
+    "requirejs"
+  ],
+  "author": "LoeiFy <LoeiFy@gmail.com>",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/fratercula/megaptera/issues"
   },
-  "homepage": "https://github.com/fratercula/megaptera#readme"
+  "homepage": "https://github.com/fratercula/megaptera#readme",
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "minimist": "^1.2.5",
+    "readline-sync": "^1.4.10"
+  }
 }

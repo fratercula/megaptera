@@ -11,11 +11,15 @@
 <script>
 var config = {
   packages: {
-    'global': './dist/global.js',
-    'test-name': './dist/test-name.js',
-    'pkg-name': './pkg-name.js',
+    global: './dist/global.js',
+    devtools: './dist/devtools.js',
+    entry: './entry.js',
   },
-  path: '/test',
+  page: {
+    path: '/',
+    entry: 'entry',
+    devtools: 'devtools',
+  },
 }
 var humpback = new window.Humpback(config)
 humpback.start()

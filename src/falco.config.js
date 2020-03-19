@@ -1,7 +1,4 @@
 const { resolve } = require('path')
-const config = require('../config')
-
-const { name, packages = [] } = config()
 
 const externals = [
   {
