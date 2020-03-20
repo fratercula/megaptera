@@ -23,11 +23,12 @@ const defaultExternals = [
   },
 ]
 
-module.exports = (mode, entry, externals) => ({
+module.exports = (mode, entry, externals, port) => ({
   template: join(process.cwd(), 'index.html'),
   mode,
+  port,
   injectScript: false,
-  entry: join(process.cwd(), 'index.js'),
+  entry,
   output: {
     library: '[name]',
     libraryTarget: 'amd',

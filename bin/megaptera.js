@@ -53,7 +53,7 @@ if (_[0] === 'init') {
 }
 
 if (_[0] === 'start') {
-  let port = Number(options.p)
+  let port = Number(options.p) || 0
 
   if (port < 1000) {
     port = 6666
@@ -68,27 +68,35 @@ if (_[0] === 'start') {
       } = require(join(cwd, 'config.js')) // eslint-disable-line
       const { name: testName } = component
 
-      fs.copySync(join(cwd, 'config.js'), resolve(__dirname, '../src/usr-config.js'))
+      fs.copySync(join(cwd, 'config.js'), resolve(__dirname, '../src/user-config.js'))
 
-      // const preConfig = falcoConfig(
-      //   'production',
-      //   {
-      //     [testName]: resolve(__dirname, '../src/humpback/devtools.js'),
-      //     global: resolve(__dirname, '../src/humpback/index.js'),
-      //   },
-      //   externals,
-      // )
+      const preConfig = falcoConfig(
+        'production',
+        {
+          [testName]: resolve(__dirname, '../src/humpback/devtools.js'),
+          global: resolve(__dirname, '../src/humpback/index.js'),
+        },
+        externals,
+      )
 
-      const { codes, dependencies } = await falco({
-        entry: join(cwd, 'code.js'),
-        targets: { esmodules: true },
-      })
-      console.log(dependencies)
+      await falco(preConfig)
+
+      const devConfig = falcoConfig(
+        'development',
+        {
+          [pkgName]: join(cwd, 'index.js'),
+        },
+        externals,
+        port,
+      )
+
+      falco(devConfig)
     } catch (e) {
-      console.log(e)
+      global.console.log(e)
     }
   })()
 }
 
 if (_[0] === 'build') {
+  //
 }

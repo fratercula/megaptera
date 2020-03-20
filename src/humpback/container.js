@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { Resizable } from 're-resizable'
-import userConfig from '../usr-config'
+import userConfig from '../user-config'
 import classes from './index.module.less'
 
 class Resize extends Component {

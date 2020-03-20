@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import JSONTree from 'react-json-tree'
 import Nycticorax from 'nycticorax'
-import userConfig from '../usr-config'
+import userConfig from '../user-config'
 import classes from './index.module.less'
 
 const theme = {
