@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { Resizable } from 're-resizable'
+import userConfig from '../usr-config'
 import classes from './index.module.less'
 
 class Resize extends Component {
@@ -61,15 +62,15 @@ class Resize extends Component {
 }
 
 export default class extends Component {
-  shouldComponentUpdate(props) {
+  shouldComponentUpdate() {
     return false
   }
 
   render() {
-    const { Routes, CONFIG, componentCreator } = this.props
-    const { entry, devtools, path } = CONFIG.page
+    const { Routes, componentCreator } = this.props
+    const { name: entry, component: devtools, path } = userConfig
     const EntryComponent = componentCreator(entry)
-    const DevComponent = componentCreator(devtools)
+    const DevComponent = componentCreator(devtools.name)
 
     const C = () => (
       <Resize>

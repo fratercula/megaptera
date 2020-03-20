@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import JSONTree from 'react-json-tree'
 import Nycticorax from 'nycticorax'
-import config from '../config'
+import userConfig from '../usr-config'
 import classes from './index.module.less'
 
 const theme = {
@@ -22,7 +22,7 @@ const theme = {
   base0C: '#8abeb7',
   base0D: '#81a2be',
   base0E: '#b294bb',
-  base0F: '#a3685a'
+  base0F: '#a3685a',
 }
 
 const {
@@ -32,10 +32,10 @@ const {
   getStore,
 } = new Nycticorax()
 
-const { testComponent } = config(dispatch, getStore)
-const { name, store, dispatcher } = testComponent || {}
+const { component } = userConfig
+const { name, store, dispatcher } = component
 
-if (component) {
+if (store) {
   createStore(store)
 }
 
@@ -153,8 +153,9 @@ class X extends Component {
   }
 }
 
-if (component) {
-  Object.keys(dispatcher).forEach((e) => {
+if (dispatcher) {
+  const methods = dispatcher(dispatch, getStore)
+  Object.keys(methods).forEach((e) => {
     X[e] = dispatcher[e]
   })
 }

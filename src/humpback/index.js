@@ -1,9 +1,9 @@
 import container from './container'
 import loading from './loading'
 import error from './error'
-import config from '../config'
+import useConfig from '../usr-config'
 
-const { store, dispatcher } = config()
+const { store, dispatcher } = useConfig
 
 export default {
   error,

@@ -1,40 +1,58 @@
-module.exports.externals = [
-  // {
-  //   name: 'antd',
-  //   amd: 'antd',
-  //   root: 'antd',
-  // },
-]
-
-module.exports.routerPath = '/user'
-
-module.exports.container = {
+module.exports = {
+  // component name
   name: 'pkg-name',
-  store: {
-    name: 'humpback',
-  },
-  dispatcher: {
-    setName: async ({ dispatch }, name) => {
-      await new Promise((r) => setTimeout(r, 300))
-      dispatch({ name })
+
+  // route path
+  path: '/',
+
+  // webpack amd externals
+  externals: [
+    // {
+    //   name: 'antd',
+    //   amd: 'antd',
+    //   root: 'antd',
+    // },
+  ],
+
+  // global container
+  container: {
+    // global store
+    store: {
+      name: 'humpback',
     },
-    getName({ getStore }) {
-      return getStore().name
+
+    // global dispatcher
+    dispatcher: {
+      setName: async ({ dispatch }, name) => {
+        await new Promise((r) => setTimeout(r, 300))
+        dispatch({ name })
+      },
+      getName({ getStore }) {
+        return getStore().name
+      },
+    },
+  },
+
+  // test component
+  component: {
+    // test component name
+    name: 'test-name',
+
+    // test component store
+    store: {
+      message: 'test',
+    },
+
+    // test component dispatcher
+    dispatcher(dispatch, getStore) {
+      return {
+        setMessage(message) {
+          dispatch({ message })
+        },
+        getMessage() {
+          return getStore().message
+        },
+      }
     },
   },
 }
-
-module.exports.testComponent = (dispatch, getStore) => ({
-  name: 'test-name',
-  store: {
-    message: 'test',
-  },
-  dispatcher: {
-    setMessage(message) {
-      dispatch({ message })
-    },
-    getMessage() {
-      return getStore().message
-    }
-  },
-})

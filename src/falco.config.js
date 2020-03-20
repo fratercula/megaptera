@@ -1,4 +1,4 @@
-const { tmpDir } = require('./config')
+const { join } = require('path')
 
 const defaultExternals = [
   {
@@ -23,18 +23,16 @@ const defaultExternals = [
   },
 ]
 
-module.exports = (mode, entry, externals) => {
-  return {
-    mode,
-    injectScript: false,
-    contentBase: tmpDir,
-    entry,
-    output: {
-      library: '[name]',
-      libraryTarget: 'amd',
-      libraryExport: 'default',
-    },
-    targets: { esmodules: true },
-    externals: defaultExternals.concat(externals),
-  }
-}
+module.exports = (mode, entry, externals) => ({
+  template: join(process.cwd(), 'index.html'),
+  mode,
+  injectScript: false,
+  entry: join(process.cwd(), 'index.js'),
+  output: {
+    library: '[name]',
+    libraryTarget: 'amd',
+    libraryExport: 'default',
+  },
+  targets: { esmodules: true },
+  externals: defaultExternals.concat(externals),
+})

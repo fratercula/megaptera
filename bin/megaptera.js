@@ -6,7 +6,6 @@ const fs = require('fs-extra')
 const { resolve, join } = require('path')
 const falco = require('@fratercula/falco')
 const { version } = require('../package.json')
-const { tmpDir } = require('../src/config')
 const falcoConfig = require('../src/falco.config')
 
 const clis = ['init', 'start', 'build']
@@ -15,9 +14,9 @@ const cwd = process.cwd()
 const { _, ...options } = minimist(process.argv.slice(2))
 
 if (
-  !_.length ||
-  (!_.length && options.v !== undefined) ||
-  !clis.includes(_[0])
+  !_.length
+  || (!_.length && options.v !== undefined)
+  || !clis.includes(_[0])
 ) {
   global.console.log(version)
   process.exit(0)
@@ -34,7 +33,7 @@ if (_[0] === 'init') {
     { defaultInput: 'componet-dev' },
   )
   const testName = readlineSync.question('Enter test componet name [componet-test]:', {
-    defaultInput: 'componet-test'
+    defaultInput: 'componet-test',
   })
   const templatePath = resolve(__dirname, '../template')
 
@@ -51,7 +50,6 @@ if (_[0] === 'init') {
     })
 
   global.console.log('Success')
-  process.exit(0)
 }
 
 if (_[0] === 'start') {
@@ -63,35 +61,34 @@ if (_[0] === 'start') {
 
   (async () => {
     try {
-      const html = fs.readFileSync(join(cwd, 'index.html'), 'utf8')
-      const userConfig = fs.readFileSync(join(cwd, 'config.js'), 'utf8')
       const {
-        externals = [],
-        container = {},
-        testComponent = () => null,
-      } = require(join(cwd, 'config.js')) // eslint-disable-line
-      const pkgName = container.name
-      const testName = testComponent().name
-
-      const config = falcoConfig(
-        'production',
-        {
-          [testName]: resolve(__dirname, '../src/humpback/devtools.js'),
-          global: resolve(__dirname, '../src/humpback/index.js'),
-        },
+        name: pkgName,
         externals,
-      )
+        component,
+      } = require(join(cwd, 'config.js')) // eslint-disable-line
+      const { name: testName } = component
 
-      console.log(config)
+      fs.copySync(join(cwd, 'config.js'), resolve(__dirname, '../src/usr-config.js'))
 
+      // const preConfig = falcoConfig(
+      //   'production',
+      //   {
+      //     [testName]: resolve(__dirname, '../src/humpback/devtools.js'),
+      //     global: resolve(__dirname, '../src/humpback/index.js'),
+      //   },
+      //   externals,
+      // )
+
+      const { codes, dependencies } = await falco({
+        entry: join(cwd, 'code.js'),
+        targets: { esmodules: true },
+      })
+      console.log(dependencies)
     } catch (e) {
       console.log(e)
     }
   })()
-
-  process.exit(0)
 }
 
 if (_[0] === 'build') {
-  process.exit(0)
 }

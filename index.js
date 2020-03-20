@@ -1,18 +1,14 @@
-const { join } = require('path')
-const config = require(join(process.cwd(), 'config.js'))
+const falco = require('@fratercula/falco')
+const { join } = require('path');
 
-const {
-  name: pkgName,
-  css = [],
-  packages = [],
-  testComponent,
-} = config()
-
-let testComponentName
-
-if (testComponent) {
-  testComponentName = testComponent.name
-}
-
-const links = css.map((href) => `<link rel="stylesheet" href="${href}" />`)
-const externals = packages.map(({ url, ...rest }) => rest)
+(async () => {
+  try {
+    const { template } = await falco({
+      entry: join(process.cwd(), 'code.js'),
+      targets: { esmodules: true },
+    })
+    console.log(template)
+  } catch (e) {
+    console.log(e)
+  }
+})()
