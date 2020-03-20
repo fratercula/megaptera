@@ -6,6 +6,8 @@ module.exports.externals = [
   // },
 ]
 
+module.exports.routerPath = '/user'
+
 module.exports.container = {
   name: 'pkg-name',
   store: {
