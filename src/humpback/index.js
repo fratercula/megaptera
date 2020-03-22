@@ -3,7 +3,7 @@ import loading from './loading'
 import error from './error'
 import useConfig from '../user-config'
 
-const { store, dispatcher } = useConfig
+const { store, dispatcher } = useConfig.container
 
 export default {
   error,

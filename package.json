@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/fratercula/megaptera#readme",
   "dependencies": {
-    "@fratercula/falco": "^1.5.11",
+    "@fratercula/falco": "^1.5.12",
     "fs-extra": "^8.1.0",
     "minimist": "^1.2.5",
     "readline-sync": "^1.4.10"

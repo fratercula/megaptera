@@ -1,7 +1,7 @@
 // eslint-disable-next-line max-classes-per-file
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import { Resizable } from 're-resizable'
+import Resizable from 're-resizable'
 import userConfig from '../user-config'
 import classes from './index.module.less'
 
