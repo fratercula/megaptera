@@ -1,8 +1,0 @@
-{
-  "name": "componet-dev",
-  "version": "0.1.0",
-  "scripts": {
-    "start": "cd .humpback && NODE_ENV=DEV falco -c",
-    "build": "cd .humpback && NODE_ENV=BUILD falco -c"
-  }
-}

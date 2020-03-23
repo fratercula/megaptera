@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { Component } from 'react'
 import JSONTree from 'react-json-tree'
 import Nycticorax from 'nycticorax'
@@ -33,10 +36,10 @@ const {
 } = new Nycticorax()
 
 const { component } = userConfig
-const { name, store, dispatcher } = component
+const { name, store: componentStore, dispatcher } = component
 
-if (store) {
-  createStore(store)
+if (componentStore) {
+  createStore(componentStore)
 }
 
 class X extends Component {
@@ -61,8 +64,11 @@ class X extends Component {
 
     let value = params
     try {
+      // eslint-disable-next-line no-eval
       value = eval(`s = ${params}`)
-    } catch (e) {}
+    } catch (e) {
+      //
+    }
 
     let result
     try {
@@ -77,7 +83,7 @@ class X extends Component {
   render() {
     const {
       store,
-      dispatch,
+      dispatch: d,
       CONFIG,
       MOUNTED_COMPONENTS,
       NAME,
@@ -136,11 +142,11 @@ class X extends Component {
         </div>
 
         <div className={classes.form}>
-          <input onInput={e => this.onInput('event', e)} placeholder="Event Name" />
+          <input onInput={(e) => this.onInput('event', e)} placeholder="Event Name" />
         </div>
 
         <div className={classes.form}>
-          <textarea onInput={e => this.onInput('params', e)} placeholder="Params" />
+          <textarea onInput={(e) => this.onInput('params', e)} placeholder="Params" />
         </div>
 
         <div className={classes.form}>
@@ -160,4 +166,4 @@ if (dispatcher) {
   })
 }
 
-export default connect(...Object.keys(store || {}))(X)
+export default connect(...Object.keys(componentStore || {}))(X)

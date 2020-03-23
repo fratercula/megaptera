@@ -1,8 +1,8 @@
 {
   "name": "pkg-name",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "scripts": {
-    "start": "cd .humpback && NODE_ENV=DEV falco -c",
-    "build": "cd .humpback && NODE_ENV=BUILD falco -c"
+    "start": "mp start",
+    "build": "mp build"
   }
 }

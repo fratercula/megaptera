@@ -1,1 +1,3 @@
-# megaptera
+# Megaptera
+
+RequireJS(AMD) + React

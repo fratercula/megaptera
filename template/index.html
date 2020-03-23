@@ -11,11 +11,19 @@
 <script>
 var config = {
   packages: {
-    // 'react-json-tree': './react-json-tree.js',
-    // 're-resizable': './re-resizable.js',
-    'global': './global.js',
+    // dependencies
+    react: 'https://cdn.jsdelivr.net/npm/react/umd/react.production.min.js',
+    'react-dom': 'https://cdn.jsdelivr.net/npm/react-dom/umd/react-dom.production.min.js',
+    'react-router-dom': 'https://cdn.jsdelivr.net/npm/react-router-dom/umd/react-router-dom.min.js',
+    nycticorax: 'https://cdn.jsdelivr.net/npm/nycticorax/lib/index.js',
+
+    // component
+    global: './global.js',
     'test-name': './test-name.js',
     'pkg-name': './pkg-name.js',
+
+    // custom
+    // antd: 'https://unpkg.com/antd',
   },
 }
 var humpback = new window.Humpback(config)

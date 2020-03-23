@@ -1,11 +1,15 @@
-// eslint-disable-next-line max-classes-per-file
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { Resizable } from 're-resizable'
+import PropTypes from 'prop-types'
 import userConfig from '../user-config'
 import classes from './index.module.less'
 
 class Resize extends Component {
+  static propTypes = {
+    children: PropTypes.element.isRequired,
+  }
+
   state = {
     width: 460,
     height: 640,
@@ -55,13 +59,20 @@ class Resize extends Component {
         >
           {children}
         </Resizable>
-        <div className={classes.size}>{width} x {height}</div>
+        <div className={classes.size}>
+          {width} x {height}
+        </div>
       </div>
     )
   }
 }
 
 export default class extends Component {
+  static propTypes = {
+    Routes: PropTypes.element.isRequired,
+    componentCreator: PropTypes.func.isRequired,
+  }
+
   shouldComponentUpdate() {
     return false
   }
