@@ -3,7 +3,7 @@ module.exports = {
   name: 'componet-dev',
 
   // route path
-  path: '/',
+  path: '/user',
 
   // webpack amd externals
   externals: [

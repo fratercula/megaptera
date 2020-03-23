@@ -1,10 +1,13 @@
 {
   "name": "megaptera",
   "version": "0.1.0",
+  "preferGlobal": true,
   "description": "RequireJS(AMD) + React",
-  "main": "index.js",
+  "main": "bin/megaptera.js",
   "scripts": {
-    "start": "cd template && node ../index.js"
+    "init": "cd test && node ../bin/megaptera.js init",
+    "start": "cd test && node ../bin/megaptera.js start",
+    "build": "cd test && node ../bin/megaptera.js build"
   },
   "repository": {
     "type": "git",

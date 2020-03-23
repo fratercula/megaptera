@@ -100,5 +100,18 @@ if (_[0] === 'start') {
 }
 
 if (_[0] === 'build') {
-  //
+  (async () => {
+    const { externals, name: pkgName } = require(join(cwd, 'config.js')) // eslint-disable-line
+    const buildConfig = falcoConfig(
+      'production',
+      {
+        [pkgName]: join(cwd, 'index.js'),
+      },
+      externals,
+    )
+    const { codes } = await falco(buildConfig)
+    codes.forEach(({ name, content }) => {
+      fs.outputFileSync(join(cwd, 'dist', name), content)
+    })
+  })()
 }
