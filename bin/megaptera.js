@@ -3,7 +3,6 @@
 const minimist = require('minimist')
 const readlineSync = require('readline-sync')
 const fs = require('fs-extra')
-const { tmpdir } = require('os')
 const { resolve, join } = require('path')
 const falco = require('@fratercula/falco')
 const { version } = require('../package.json')
@@ -70,7 +69,6 @@ if (_[0] === 'start') {
       const { name: testName } = component
 
       fs.copySync(join(cwd, 'config.js'), resolve(__dirname, '../src/user-config.js'))
-      fs.copySync(resolve(__dirname, '../src/lib'), join(tmpdir(), 'FALCO'))
 
       const preConfig = falcoConfig(
         'production',

@@ -35,7 +35,7 @@ const {
   getStore,
 } = new Nycticorax()
 
-const { component } = userConfig
+const { component, name: pkgName } = userConfig
 const { name, store: componentStore, dispatcher } = component
 
 if (componentStore) {
@@ -72,7 +72,7 @@ class X extends Component {
 
     let result
     try {
-      result = await this.props.dispatch('entry', event, value)
+      result = await this.props.dispatch(pkgName, event, value)
     } catch (e) {
       result = `Error: ${e.message || e}`
     }
