@@ -14,13 +14,13 @@ const {
 createStore({ value: 'megaptera' })
 
 class X extends Component {
-  static getName() {
-    return getStore().name
+  static getValue() {
+    return getStore().value
   }
 
-  static async setName(name) {
+  static async setValue(name) {
     await new Promise((r) => setTimeout(r, 1000))
-    dispatch({ name }, true)
+    dispatch({ value: name }, true)
   }
 
   static propTypes = {
@@ -29,33 +29,44 @@ class X extends Component {
     value: PropTypes.string.isRequired,
   }
 
+  state = {
+    message: '',
+  }
+
   setGlobalName = () => {
     this.props.dispatch('global', 'setName', `${Math.random()}`)
   }
 
-  getMessage = () => {
-    this.props.dispatch('test-name', 'getMessage')
+  getMessage = async () => {
+    const message = await this.props.dispatch('test-name', 'getMessage')
+    this.setState({ message })
   }
 
   render() {
     const { store, value } = this.props
+    const { message } = this.state
+
     return (
       <div className={classes.main}>
-        <div>
-          Current:
-          {value}
+        <div className={classes.text}>
+          <div>value:</div>
+          <div>{value}</div>
         </div>
-        <div>
-          Global:
-          {store.name}
+        <div className={classes.text}>
+          <div>global:</div>
+          <div>{store.name}</div>
         </div>
-        <button type="button" onClick={this.setGlobalName}>
-          Set Global
-        </button>
-        <button type="button" onClick={this.getMessage}>
-          Get Test Component
-        </button>
-        <input />
+        <div className={classes.text}>
+          <button type="button" onClick={this.setGlobalName}>
+            set global name
+          </button>
+        </div>
+        <div className={classes.text}>
+          <input value={message} placeholder="test componet message" />
+          <button type="button" onClick={this.getMessage}>
+            Get
+          </button>
+        </div>
       </div>
     )
   }

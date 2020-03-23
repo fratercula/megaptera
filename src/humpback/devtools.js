@@ -162,7 +162,7 @@ class X extends Component {
 if (dispatcher) {
   const methods = dispatcher(dispatch, getStore)
   Object.keys(methods).forEach((e) => {
-    X[e] = dispatcher[e]
+    X[e] = methods[e]
   })
 }
 
