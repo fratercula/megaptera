@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 const minimist = require('minimist')
-const readlineSync = require('readline-sync')
 const fs = require('fs-extra')
 const { resolve, join } = require('path')
 const falco = require('@fratercula/falco')
+const prompts = require('prompts')
 const { version } = require('../package.json')
 const falcoConfig = require('../src/falco.config')
 
@@ -22,34 +22,70 @@ if (
   process.exit(0)
 }
 
-readlineSync.setDefaultOptions({
-  limit: [/[a-z][-a-z0-9]/],
-  limitMessage: 'Componet name error (lowercase, number or `-`)',
-})
+const validator = (value) => {
+  if (/[a-z][-a-z0-9]/.test(value)) {
+    return true
+  }
+  return 'Componet name error (lowercase, number or `-`)'
+}
 
 if (_[0] === 'init') {
-  const pkgName = readlineSync.question(
-    'Enter componet name [componet-dev]:',
-    { defaultInput: 'componet-dev' },
-  )
-  const testName = readlineSync.question('Enter test componet name [componet-test]:', {
-    defaultInput: 'componet-test',
-  })
-  const templatePath = resolve(__dirname, '../template')
-
-  fs
-    .readdirSync(templatePath)
-    .filter((name) => !ignores.includes(name))
-    .forEach((name) => {
-      const content = fs
-        .readFileSync(join(templatePath, name), 'utf8')
-        .replace(/pkg-name/g, pkgName)
-        .replace(/test-name/g, testName)
-
-      fs.outputFileSync(join(cwd, _[1] || '', name), content)
+  (async () => {
+    let { initType } = await prompts({
+      type: 'toggle',
+      name: 'initType',
+      message: 'Select development type',
+      initial: false,
+      inactive: 'component',
+      active: 'global',
     })
 
-  global.console.log('Success')
+    if (initType === undefined) {
+      process.exit(0)
+    }
+
+    initType = !initType ? 'component' : 'global'
+
+    if (initType === 'component') {
+      const { pkgName } = await prompts({
+        type: 'text',
+        initial: 'component-dev',
+        message: 'Enter componet name [componet-dev]:',
+        name: 'pkgName',
+        validate: validator,
+      })
+
+      if (pkgName === undefined) {
+        process.exit(0)
+      }
+
+      const { testName } = await prompts({
+        type: 'text',
+        initial: 'component-test',
+        message: 'Enter test componet name [componet-test]:',
+        name: 'testName',
+        validate: validator,
+      })
+
+      if (testName === undefined) {
+        process.exit(0)
+      }
+
+      const templatePath = resolve(__dirname, '../template/component')
+
+      fs
+        .readdirSync(templatePath)
+        .filter((name) => !ignores.includes(name))
+        .forEach((name) => {
+          const content = fs
+            .readFileSync(join(templatePath, name), 'utf8')
+            .replace(/pkg-name/g, pkgName)
+            .replace(/test-name/g, testName)
+
+          fs.outputFileSync(join(cwd, _[1] || '', name), content)
+        })
+    }
+  })()
 }
 
 if (_[0] === 'start') {

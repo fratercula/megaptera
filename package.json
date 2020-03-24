@@ -31,6 +31,6 @@
     "@fratercula/falco": "^1.5.12",
     "fs-extra": "^8.1.0",
     "minimist": "^1.2.5",
-    "readline-sync": "^1.4.10"
+    "prompts": "^2.3.2"
   }
 }
