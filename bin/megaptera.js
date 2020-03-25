@@ -46,8 +46,10 @@ if (_[0] === 'init') {
 
     initType = !initType ? 'component' : 'global'
 
+    let pkgName = 'component-dev'
+
     if (initType === 'component') {
-      const { pkgName } = await prompts({
+      const data = await prompts({
         type: 'text',
         initial: 'component-dev',
         message: 'Enter componet name [componet-dev]:',
@@ -55,36 +57,38 @@ if (_[0] === 'init') {
         validate: validator,
       })
 
-      if (pkgName === undefined) {
+      if (data.pkgName === undefined) {
         process.exit(0)
       }
 
-      const { testName } = await prompts({
-        type: 'text',
-        initial: 'component-test',
-        message: 'Enter test componet name [componet-test]:',
-        name: 'testName',
-        validate: validator,
-      })
-
-      if (testName === undefined) {
-        process.exit(0)
-      }
-
-      const templatePath = resolve(__dirname, '../template/component')
-
-      fs
-        .readdirSync(templatePath)
-        .filter((name) => !ignores.includes(name))
-        .forEach((name) => {
-          const content = fs
-            .readFileSync(join(templatePath, name), 'utf8')
-            .replace(/pkg-name/g, pkgName)
-            .replace(/test-name/g, testName)
-
-          fs.outputFileSync(join(cwd, _[1] || '', name), content)
-        })
+      pkgName = data.pkgName
     }
+
+    const { testName } = await prompts({
+      type: 'text',
+      initial: 'component-test',
+      message: 'Enter test componet name [componet-test]:',
+      name: 'testName',
+      validate: validator,
+    })
+
+    if (testName === undefined) {
+      process.exit(0)
+    }
+
+    const templatePath = resolve(__dirname, `../template/${initType}`)
+
+    fs
+      .readdirSync(templatePath)
+      .filter((name) => !ignores.includes(name))
+      .forEach((name) => {
+        const content = fs
+          .readFileSync(join(templatePath, name), 'utf8')
+          .replace(/pkg-name/g, pkgName)
+          .replace(/test-name/g, testName)
+
+        fs.outputFileSync(join(cwd, _[1] || '', name), content)
+      })
   })()
 }
 

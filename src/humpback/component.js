@@ -100,37 +100,13 @@ class X extends Component {
           className={classes.setting}
         />
         <div className={classes.header}>
-          <div
-            onClick={() => this.setState({ current: 'global' })}
-            className={current === 'global' ? classes.active : ''}
-          >
-            global
-          </div>
-          {
-            name
-              ? (
-                <div
-                  onClick={() => this.setState({ current: 'devtools' })}
-                  className={current === 'devtools' ? classes.active : ''}
-                >
-                  {name}
-                </div>
-              )
-              : null
-          }
+          <div>{name}</div>
           <div
             onClick={() => this.setState({ active: false })}
             className={classes.close}
           />
         </div>
         <div
-          style={{ display: current === 'global' ? 'block' : 'none' }}
-          className={classes.code}
-        >
-          <JSONTree data={store} theme={theme} />
-        </div>
-        <div
-          style={{ display: current === 'devtools' ? 'block' : 'none' }}
           className={classes.code}
         >
           <JSONTree data={rest} theme={theme} />
