@@ -22,3 +22,36 @@
     border-radius: 3px;
   }
 }
+
+.main {
+  padding-top: 50px;
+}
+.nav {
+  display: flex;
+  justify-content: center;
+
+  a {
+    background: #eee;
+    padding: 15px 0;
+    width: 150px;
+    color: #333;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+
+    &.active {
+      background: rgb(43, 142, 199);
+      color: #fff;
+    }
+
+    &:first-child {
+      margin-right: 2px;
+    }
+  }
+}
+.components {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+}
