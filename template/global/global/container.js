@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Route, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 export default class extends Component {
   static propTypes = {
     Routes: PropTypes.element.isRequired,
     componentCreator: PropTypes.func.isRequired,
+    CONFIG: PropTypes.object.isRequired,
   }
 
   shouldComponentUpdate() {
@@ -12,29 +14,34 @@ export default class extends Component {
   }
 
   render() {
-    const { Routes, componentCreator } = this.props
-    const { name: entry, component: devtools, path } = userConfig
-    const EntryComponent = componentCreator(entry)
-    const DevComponent = componentCreator(devtools.name)
+    const { Routes, componentCreator, CONFIG } = this.props
 
-    const C = () => (
-      <Resize>
-        <EntryComponent />
-      </Resize>
-    )
+    const routesComponent = CONFIG.routes.map(({ path, components }) => {
+      const routeComponent = () => components.map((name) => {
+        const C = componentCreator(name)
+        return (<C />)
+      })
 
-    const routeComponent = (
-      <Route
-        exact
-        path={path}
-        component={C}
-      />
-    )
+      return (
+        <Route
+          key={path}
+          exact
+          path={path}
+          component={routeComponent}
+        />
+      )
+    })
 
     return (
       <>
-        <Routes config={routeComponent} />
-        <DevComponent />
+        {
+          CONFIG.routes.map(({ name, path }) => (
+            <div key={path}>
+              <Link to={path}>{name}</Link>
+            </div>
+          ))
+        }
+        <Routes config={routesComponent} />
       </>
     )
   }
