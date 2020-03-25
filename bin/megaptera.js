@@ -78,17 +78,26 @@ if (_[0] === 'init') {
 
     const templatePath = resolve(__dirname, `../template/${initType}`)
 
-    fs
-      .readdirSync(templatePath)
+    const copyFiles = (dir, prefix = '/') => fs
+      .readdirSync(dir)
       .filter((name) => !ignores.includes(name))
       .forEach((name) => {
+        const currentPath = join(dir, name)
+
+        if (fs.lstatSync(currentPath).isDirectory()) {
+          copyFiles(currentPath, name)
+          return
+        }
+
         const content = fs
-          .readFileSync(join(templatePath, name), 'utf8')
+          .readFileSync(currentPath, 'utf8')
           .replace(/pkg-name/g, pkgName)
           .replace(/test-name/g, testName)
 
-        fs.outputFileSync(join(cwd, _[1] || '', name), content)
+        fs.outputFileSync(join(cwd, _[1] || '', prefix, name), content)
       })
+
+    copyFiles(templatePath)
   })()
 }
 

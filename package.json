@@ -8,7 +8,7 @@
     "mp": "./bin/megaptera.js"
   },
   "scripts": {
-    "init": "mkdir -p test && cd test && node ../bin/megaptera.js init",
+    "init": "rm -rf test && mkdir test && cd test && node ../bin/megaptera.js init",
     "start": "cd test && node ../bin/megaptera.js start",
     "build": "cd test && node ../bin/megaptera.js build"
   },
