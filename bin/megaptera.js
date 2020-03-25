@@ -121,10 +121,14 @@ if (_[0] === 'start') {
 
       const preConfig = falcoConfig(
         'production',
-        {
-          [testName]: resolve(__dirname, '../src/humpback/devtools.js'),
-          global: resolve(__dirname, '../src/humpback/index.js'),
-        },
+        pkgName
+          ? {
+            [testName]: resolve(__dirname, '../src/humpback/devtools.js'),
+            global: resolve(__dirname, '../src/humpback/index.js'),
+          }
+          : {
+            [testName]: resolve(__dirname, '../src/humpback/component.js'),
+          },
         externals,
       )
 
@@ -132,9 +136,12 @@ if (_[0] === 'start') {
 
       const devConfig = falcoConfig(
         'development',
-        {
-          [pkgName]: join(cwd, 'index.js'),
-        },
+        pkgName
+          ? {
+            [pkgName]: join(cwd, 'index.js'),
+          } : {
+            global: join(cwd, 'index.js'),
+          },
         externals,
         port,
       )
@@ -151,9 +158,13 @@ if (_[0] === 'build') {
     const { externals, name: pkgName } = require(join(cwd, 'config.js')) // eslint-disable-line
     const buildConfig = falcoConfig(
       'production',
-      {
-        [pkgName]: join(cwd, 'index.js'),
-      },
+      pkgName
+        ? {
+          [pkgName]: join(cwd, 'index.js'),
+        }
+        : {
+          global: join(cwd, 'index.js'),
+        },
       externals,
     )
     const { codes } = await falco(buildConfig)
