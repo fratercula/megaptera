@@ -38,18 +38,23 @@ export default class extends Component {
     })
 
     return (
-      <div className={classes.main}>
-        <div className={classes.nav}>
-          {
-            CONFIG.routes.map(({ name, path }) => (
-              <Link key={path} to={path}>{name}</Link>
-            ))
-          }
+      <>
+        <div className={classes.header}>
+          Logo
         </div>
-        <div className={classes.components}>
-          <Routes config={routesComponent} />
+        <div className={classes.main}>
+          <div className={classes.nav}>
+            {
+              CONFIG.routes.map(({ name, path }) => (
+                <Link key={path} to={path}>{name}</Link>
+              ))
+            }
+          </div>
+          <div className={classes.components}>
+            <Routes config={routesComponent} />
+          </div>
         </div>
-      </div>
+      </>
     )
   }
 }

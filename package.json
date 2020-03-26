@@ -9,7 +9,7 @@
   },
   "scripts": {
     "init": "rm -rf test && mkdir test && cd test && node ../bin/megaptera.js init",
-    "start": "cd test && node ../bin/megaptera.js start",
+    "dev": "cd test && node ../bin/megaptera.js start",
     "build": "cd test && node ../bin/megaptera.js build"
   },
   "repository": {

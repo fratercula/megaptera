@@ -23,35 +23,33 @@
   }
 }
 
+.header {
+  background: #eee;
+  height: 60px;
+  line-height: 60px;
+  color: #333;
+  font-size: 20px;
+  padding-left: 20px;
+}
 .main {
-  padding-top: 50px;
+  display: flex;
 }
 .nav {
-  display: flex;
-  justify-content: center;
+  background: rgb(224, 224, 224);
+  height: calc(100vh - 60px);
 
   a {
-    background: #eee;
+    background: rgb(86, 128, 148);
     padding: 15px 0;
-    width: 150px;
-    color: #333;
+    width: 200px;
+    color: #fff;
     font-size: 16px;
     text-align: center;
     text-decoration: none;
-
-    &.active {
-      background: rgb(43, 142, 199);
-      color: #fff;
-    }
-
-    &:first-child {
-      margin-right: 2px;
-    }
+    display: block;
+    margin-top: 20px;
   }
 }
 .components {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 400px;
+  padding: 60px;
 }

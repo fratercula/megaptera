@@ -98,6 +98,8 @@ if (_[0] === 'init') {
       })
 
     copyFiles(templatePath)
+
+    global.console.log('Success')
   })()
 }
 
