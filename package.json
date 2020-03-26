@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "preferGlobal": true,
   "description": "RequireJS(AMD) + React",
+  "files": [
+    "bin",
+    "src",
+    "template"
+  ],
   "bin": {
     "megaptera": "./bin/megaptera.js",
     "mp": "./bin/megaptera.js"
