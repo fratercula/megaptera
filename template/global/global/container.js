@@ -24,7 +24,11 @@ export default class extends Component {
     const routesComponent = CONFIG.routes.map(({ path, components }) => {
       const routeComponent = () => components.map((name) => {
         const C = componentCreator(name)
-        return (<C />)
+        return (
+          <div className={classes.component}>
+            <C />
+          </div>
+        )
       })
 
       return (

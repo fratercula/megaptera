@@ -43,7 +43,7 @@ if (componentStore) {
 
 class X extends Component {
   state = {
-    active: false,
+    active: true,
     event: undefined,
     params: undefined,
     result: undefined,
@@ -94,7 +94,10 @@ class X extends Component {
     const { active, result } = this.state
 
     return (
-      <div className={`${classes.view}${active ? ` ${classes.active}` : ''}`}>
+      <div
+        style={{ position: 'static' }}
+        className={`${classes.view}${active ? ` ${classes.active}` : ''}`}
+      >
         <div
           onClick={() => this.setState({ active: true })}
           className={classes.setting}
