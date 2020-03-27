@@ -3,11 +3,13 @@
 const minimist = require('minimist')
 const fs = require('fs-extra')
 const { resolve, join } = require('path')
+const { tmpdir } = require('os')
 const falco = require('@fratercula/falco')
 const prompts = require('prompts')
 const { version } = require('../package.json')
 const falcoConfig = require('../src/falco.config')
 
+const tmpDir = join(tmpdir(), 'FALCO')
 const clis = ['init', 'start', 'build']
 const ignores = ['Thumbs.db', '.DS_Store']
 const cwd = process.cwd()
@@ -119,17 +121,18 @@ if (_[0] === 'start') {
       } = require(join(cwd, 'config.js')) // eslint-disable-line
       const { name: testName } = component
 
-      fs.copySync(join(cwd, 'config.js'), resolve(__dirname, '../src/user-config.js'))
+      fs.copySync(join(cwd, 'config.js'), join(tmpDir, 'user-config.js'))
+      fs.copySync(resolve(__dirname, '../src/humpback'), join(tmpDir, 'humpback'))
 
       const preConfig = falcoConfig(
         'production',
         pkgName
           ? {
-            [testName]: resolve(__dirname, '../src/humpback/devtools.js'),
-            global: resolve(__dirname, '../src/humpback/index.js'),
+            [testName]: join(tmpDir, 'humpback/devtools.js'),
+            global: join(tmpDir, 'humpback/index.js'),
           }
           : {
-            [testName]: resolve(__dirname, '../src/humpback/component.js'),
+            [testName]: join(tmpDir, 'humpback/component.js'),
           },
         externals,
       )
@@ -173,5 +176,7 @@ if (_[0] === 'build') {
     codes.forEach(({ name, content }) => {
       fs.outputFileSync(join(cwd, 'dist', name), content)
     })
+
+    global.console.log('Success')
   })()
 }
