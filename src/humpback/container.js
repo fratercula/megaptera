@@ -99,7 +99,7 @@ export default class extends Component {
 
     return (
       <>
-        <Routes config={routeComponent} />
+        <Routes components={routeComponent} />
         <DevComponent />
       </>
     )

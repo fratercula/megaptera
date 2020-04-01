@@ -38,6 +38,6 @@ module.exports = (mode, entry, externals, port) => ({
   targets: { esmodules: true },
   externals: defaultExternals.concat(externals),
   npm: {
-    'prefer-offline': true,
+    registry: 'https://registry.npm.taobao.org',
   },
 })

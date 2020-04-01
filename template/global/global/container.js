@@ -8,10 +8,12 @@ export default class extends Component {
     Routes: PropTypes.element.isRequired,
     componentCreator: PropTypes.func.isRequired,
     CONFIG: PropTypes.object.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    store: PropTypes.func.isRequired,
   }
 
-  shouldComponentUpdate() {
-    return false
+  onSet = () => {
+    this.props.dispatch('test-name', 'setMessage', `${Math.random()}`)
   }
 
   render() {
@@ -19,6 +21,7 @@ export default class extends Component {
       Routes,
       componentCreator,
       CONFIG,
+      store,
     } = this.props
 
     const routesComponent = CONFIG.routes.map(({ path, components }) => {
@@ -44,7 +47,9 @@ export default class extends Component {
     return (
       <>
         <div className={classes.header}>
-          Logo
+          <div>Logo</div>
+          <button type="button" onClick={this.onSet}>set component message</button>
+          <div>name: {store.name}</div>
         </div>
         <div className={classes.main}>
           <div className={classes.nav}>
@@ -55,7 +60,7 @@ export default class extends Component {
             }
           </div>
           <div className={classes.components}>
-            <Routes config={routesComponent} />
+            <Routes components={routesComponent} />
           </div>
         </div>
       </>
