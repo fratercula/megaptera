@@ -57,7 +57,16 @@ class Resize extends Component {
           onResizeStop={this.onSize}
           handleComponent={{ right: (<Handle />), bottom: (<Handle type="bottom" />), bottomRight: (<Corner />) }}
         >
-          {children}
+          <div
+            className={classes.inner}
+            style={{
+              width: width - 5,
+              height: height - 5,
+              overflow: 'auto',
+            }}
+          >
+            {children}
+          </div>
         </Resizable>
         <div className={classes.size}>
           {width} x {height}
