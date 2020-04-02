@@ -104,10 +104,6 @@ class X extends Component {
         />
         <div className={classes.header}>
           <div>{name}</div>
-          <div
-            onClick={() => this.setState({ active: false })}
-            className={classes.close}
-          />
         </div>
         <div
           className={classes.code}
