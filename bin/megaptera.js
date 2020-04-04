@@ -174,7 +174,7 @@ if (_[0] === 'build') {
     )
     const { codes } = await falco(buildConfig)
     codes.forEach(({ name, content }) => {
-      fs.outputFileSync(join(cwd, 'dist', name), content)
+      fs.outputFileSync(join(cwd, _[1] || 'dist', name), content)
     })
 
     global.console.log('Success')
