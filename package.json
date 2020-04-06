@@ -1,9 +1,10 @@
 {
   "name": "megaptera",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "preferGlobal": true,
   "description": "RequireJS(AMD) + React",
   "files": [
+    "lib",
     "bin",
     "src",
     "template"
