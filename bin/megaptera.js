@@ -118,15 +118,16 @@ if (_[0] === 'start') {
         name: pkgName,
         externals,
         component,
+        registry,
       } = require(join(cwd, 'config.js')) // eslint-disable-line
       const { name: testName } = component
 
       fs.copySync(join(cwd, 'config.js'), join(tmpDir, 'user-config.js'))
       fs.copySync(resolve(__dirname, '../src/humpback'), join(tmpDir, 'humpback'))
 
-      const preConfig = falcoConfig(
-        'production',
-        pkgName
+      const preConfig = falcoConfig({
+        mode: 'production',
+        entry: pkgName
           ? {
             [testName]: join(tmpDir, 'humpback/devtools.js'),
             global: join(tmpDir, 'humpback/index.js'),
@@ -135,13 +136,14 @@ if (_[0] === 'start') {
             [testName]: join(tmpDir, 'humpback/component.js'),
           },
         externals,
-      )
+        registry,
+      })
 
       await falco(preConfig)
 
-      const devConfig = falcoConfig(
-        'development',
-        pkgName
+      const devConfig = falcoConfig({
+        mode: 'development',
+        entry: pkgName
           ? {
             [pkgName]: join(cwd, 'index.js'),
           } : {
@@ -149,7 +151,8 @@ if (_[0] === 'start') {
           },
         externals,
         port,
-      )
+        registry,
+      })
 
       falco(devConfig)
     } catch (e) {

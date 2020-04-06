@@ -13,6 +13,8 @@ module.exports = {
     //   root: 'antd',
     // },
   ],
+  // npm registry
+  // registry: 'https://registry.npm.taobao.org',
 
   // global container
   container: {

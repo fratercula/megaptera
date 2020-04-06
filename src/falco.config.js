@@ -23,7 +23,13 @@ const defaultExternals = [
   },
 ]
 
-module.exports = (mode, entry, externals, port) => ({
+module.exports = ({
+  mode,
+  entry,
+  externals,
+  port,
+  registry,
+}) => ({
   template: join(process.cwd(), 'index.html'),
   context: resolve(__dirname, '../'),
   mode,
@@ -38,6 +44,6 @@ module.exports = (mode, entry, externals, port) => ({
   targets: { esmodules: true },
   externals: defaultExternals.concat(externals),
   npm: {
-    registry: 'https://registry.npm.taobao.org',
+    registry,
   },
 })
