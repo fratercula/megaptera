@@ -21,6 +21,16 @@ const defaultExternals = [
     root: 'nycticorax',
     amd: 'nycticorax',
   },
+  {
+    name: 'react-json-tree',
+    root: 'ReactJsonTree',
+    amd: 'react-json-tree',
+  },
+  {
+    name: 're-resizable',
+    root: 'reResizable',
+    amd: 're-resizable',
+  },
 ]
 
 module.exports = ({

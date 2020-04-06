@@ -125,6 +125,10 @@ if (_[0] === 'start') {
       fs.copySync(join(cwd, 'config.js'), join(tmpDir, 'user-config.js'))
       fs.copySync(resolve(__dirname, '../src/humpback'), join(tmpDir, 'humpback'))
 
+      if (pkgName) {
+        fs.copySync(resolve(__dirname, '../lib/re-resizable.js'), join(tmpDir, 're-resizable.js'))
+      }
+
       const preConfig = falcoConfig({
         mode: 'production',
         entry: pkgName

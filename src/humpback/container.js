@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import { Resizable } from 're-resizable'
+import Resizable from 're-resizable'
 import PropTypes from 'prop-types'
 import userConfig from '../user-config'
 import classes from './index.module.less'
