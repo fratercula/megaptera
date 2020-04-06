@@ -45,7 +45,7 @@ if (componentStore) {
 class X extends Component {
   state = {
     current: 'global',
-    active: false,
+    active: !pkgName,
     event: undefined,
     params: undefined,
     result: undefined,
@@ -83,7 +83,7 @@ class X extends Component {
 
     let result
     try {
-      result = await this.props.dispatch(pkgName, event, value)
+      result = await this.props.dispatch(pkgName || 'global', event, value)
     } catch (e) {
       result = `Error: ${e.message || e}`
     }
@@ -107,18 +107,27 @@ class X extends Component {
     const { current, active, result } = this.state
 
     return (
-      <div className={`${classes.view}${active ? ` ${classes.active}` : ''}`}>
+      <div
+        style={{ position: pkgName ? 'absolute' : 'static' }}
+        className={`${classes.view}${active ? ` ${classes.active}` : ''}`}
+      >
         <div
           onClick={() => this.setState({ active: true })}
           className={classes.setting}
         />
         <div className={classes.header}>
-          <div
-            onClick={() => this.setState({ current: 'global' })}
-            className={current === 'global' ? classes.active : ''}
-          >
-            global
-          </div>
+          {
+            pkgName
+              ? (
+                <div
+                  onClick={() => this.setState({ current: 'global' })}
+                  className={current === 'global' ? classes.active : ''}
+                >
+                  global
+                </div>
+              )
+              : null
+            }
           {
             name
               ? (
@@ -131,10 +140,16 @@ class X extends Component {
               )
               : null
           }
-          <div
-            onClick={() => this.setState({ active: false })}
-            className={classes.close}
-          />
+          {
+            pkgName
+              ? (
+                <div
+                  onClick={() => this.setState({ active: false })}
+                  className={classes.close}
+                />
+              )
+              : null
+          }
         </div>
         <div
           style={{ display: current === 'global' ? 'block' : 'none' }}

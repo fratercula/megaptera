@@ -43,7 +43,5 @@ module.exports = ({
   },
   targets: { esmodules: true },
   externals: defaultExternals.concat(externals),
-  npm: {
-    registry,
-  },
+  npm: registry ? { registry } : {},
 })

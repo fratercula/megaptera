@@ -133,7 +133,7 @@ if (_[0] === 'start') {
             global: join(tmpDir, 'humpback/index.js'),
           }
           : {
-            [testName]: join(tmpDir, 'humpback/component.js'),
+            [testName]: join(tmpDir, 'humpback/devtools.js'),
           },
         externals,
         registry,
