@@ -63,11 +63,22 @@ class X extends Component {
     }
 
     let value = params
-    try {
-      // eslint-disable-next-line no-eval
-      value = eval(`s = ${params}`)
-    } catch (e) {
-      //
+
+    if (value !== 'true' && value !== 'false') {
+      if (value === 'null') {
+        value = null
+      } else {
+        try {
+          // eslint-disable-next-line no-eval
+          eval(`value = ${value}`)
+          // eslint-disable-next-line no-restricted-globals
+          value = isNaN(Number(value)) || Array.isArray(value) ? value : Number(value)
+        } catch (e) {
+          //
+        }
+      }
+    } else {
+      value = value === 'true'
     }
 
     let result
