@@ -44,7 +44,7 @@ if (componentStore) {
 
 class X extends Component {
   state = {
-    current: 'global',
+    current: pkgName ? 'global' : 'devtools',
     active: !pkgName,
     event: undefined,
     params: undefined,
