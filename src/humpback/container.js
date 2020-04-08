@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
 import Resizable from 're-resizable'
 import PropTypes from 'prop-types'
 import userConfig from '../user-config'
@@ -76,10 +76,16 @@ class Resize extends Component {
   }
 }
 
-export default class extends Component {
+class R extends Component {
   static propTypes = {
     Routes: PropTypes.element.isRequired,
     componentCreator: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
+  }
+
+  componentDidMount() {
+    const { path } = userConfig
+    this.props.history.replace(path)
   }
 
   shouldComponentUpdate() {
@@ -114,3 +120,5 @@ export default class extends Component {
     )
   }
 }
+
+export default withRouter(R)
