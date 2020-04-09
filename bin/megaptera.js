@@ -167,7 +167,16 @@ if (_[0] === 'start') {
 
 if (_[0] === 'build') {
   (async () => {
-    const { externals, name: pkgName } = require(join(cwd, 'config.js')) // eslint-disable-line
+    const {
+      externals,
+      name: pkgName,
+      output = '[version]/index.js',
+    } = require(join(cwd, 'config.js')) // eslint-disable-line
+    const { version } = require(join(cwd, 'package.json')) // eslint-disable-line
+    const outputFile = output.replace('[name]', pkgName).replace('[version]', version)
+    const [filename] = outputFile.split('/').slice(-1)
+    const filePath = outputFile.split('/').slice(0, -1).join('/')
+
     const buildConfig = falcoConfig({
       mode: 'production',
       entry: pkgName
@@ -178,10 +187,11 @@ if (_[0] === 'build') {
           global: join(cwd, 'index.js'),
         },
       externals,
+      filename,
     })
     const { codes } = await falco(buildConfig)
     codes.forEach(({ name, content }) => {
-      fs.outputFileSync(join(cwd, _[1] || 'dist', name), content)
+      fs.outputFileSync(join(cwd, _[1] || 'dist', filePath, name), content)
     })
 
     global.console.log('Success')

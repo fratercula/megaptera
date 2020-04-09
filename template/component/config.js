@@ -13,8 +13,14 @@ module.exports = {
     //   root: 'antd',
     // },
   ],
+
   // npm registry
   // registry: 'https://registry.npm.taobao.org',
+
+  // webpack build output
+  // version: package version
+  // name: component name
+  // output: '[version]/[name].js',
 
   // global container
   container: {

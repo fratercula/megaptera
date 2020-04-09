@@ -39,6 +39,7 @@ module.exports = ({
   externals,
   port,
   registry,
+  filename,
 }) => ({
   template: join(process.cwd(), 'index.html'),
   context: resolve(__dirname, '../'),
@@ -47,6 +48,7 @@ module.exports = ({
   injectScript: false,
   entry,
   output: {
+    filename: filename || '[name].js',
     library: '[name]',
     libraryTarget: 'amd',
     libraryExport: 'default',
