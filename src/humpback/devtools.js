@@ -95,13 +95,11 @@ class X extends Component {
     const {
       store,
       dispatch: d,
-      CONFIG,
-      MOUNTED_COMPONENTS,
-      NAME,
+      config,
+      mountedComponents,
       history,
       location,
       match,
-      staticContext,
       ...rest
     } = this.props
     const { current, active, result } = this.state

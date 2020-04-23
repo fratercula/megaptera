@@ -6,7 +6,9 @@ export default function ({ error, reload }) {
   return (
     <div className={classes.error}>
       <p>{error}</p>
-      <button type="button" onClick={reload}>Reload</button>
+      {
+        reload && <button type="button" onClick={reload}>Reload</button>
+      }
     </div>
   )
 }

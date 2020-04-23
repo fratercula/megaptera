@@ -7,7 +7,7 @@ export default class extends Component {
   static propTypes = {
     Routes: PropTypes.element.isRequired,
     componentCreator: PropTypes.func.isRequired,
-    CONFIG: PropTypes.object.isRequired,
+    config: PropTypes.object.isRequired,
     dispatch: PropTypes.func.isRequired,
     store: PropTypes.func.isRequired,
   }
@@ -20,29 +20,9 @@ export default class extends Component {
     const {
       Routes,
       componentCreator,
-      CONFIG,
+      config,
       store,
     } = this.props
-
-    const routesComponent = CONFIG.routes.map(({ path, components }) => {
-      const routeComponent = () => components.map((name) => {
-        const C = componentCreator(name)
-        return (
-          <div className={classes.component}>
-            <C />
-          </div>
-        )
-      })
-
-      return (
-        <Route
-          key={path}
-          exact
-          path={path}
-          component={routeComponent}
-        />
-      )
-    })
 
     return (
       <>
@@ -54,13 +34,35 @@ export default class extends Component {
         <div className={classes.main}>
           <div className={classes.nav}>
             {
-              CONFIG.routes.map(({ name, path }) => (
+              config.routes.map(({ name, path }) => (
                 <Link key={path} to={path}>{name}</Link>
               ))
             }
           </div>
           <div className={classes.components}>
-            <Routes components={routesComponent} />
+            <Routes>
+              {
+                config.routes.map(({ path, components }) => {
+                  const routeComponent = () => components.map((name) => {
+                    const C = componentCreator(name)
+                    return (
+                      <div className={classes.component}>
+                        <C />
+                      </div>
+                    )
+                  })
+
+                  return (
+                    <Route
+                      key={path}
+                      exact
+                      path={path}
+                      component={routeComponent}
+                    />
+                  )
+                })
+              }
+            </Routes>
           </div>
         </div>
       </>

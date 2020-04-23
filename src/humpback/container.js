@@ -104,17 +104,15 @@ class R extends Component {
       </Resize>
     )
 
-    const routeComponent = (
-      <Route
-        exact
-        path={path}
-        component={C}
-      />
-    )
-
     return (
       <>
-        <Routes components={routeComponent} />
+        <Routes>
+          <Route
+            exact
+            path={path}
+            component={C}
+          />
+        </Routes>
         <DevComponent />
       </>
     )
