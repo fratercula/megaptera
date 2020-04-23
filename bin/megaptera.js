@@ -169,7 +169,7 @@ if (_[0] === 'build') {
   (async () => {
     const {
       externals,
-      name: pkgName,
+      name: pkgName = 'global',
       output = '[version]/index.js',
     } = require(join(cwd, 'config.js')) // eslint-disable-line
     const { version } = require(join(cwd, 'package.json')) // eslint-disable-line
