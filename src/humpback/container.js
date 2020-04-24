@@ -84,8 +84,8 @@ class R extends Component {
   }
 
   componentDidMount() {
-    const { path } = userConfig
-    this.props.history.replace(path)
+    const { defaultPath = '/' } = userConfig
+    this.props.history.replace(defaultPath)
   }
 
   shouldComponentUpdate() {
