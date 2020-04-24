@@ -1,6 +1,12 @@
 # Megaptera
 
-RequireJS(AMD) + React
+Humpback dev CLI
+
+## Install
+
+```bash
+$ npm i megaptera -g
+```
 
 ## Usage
 
