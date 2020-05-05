@@ -66,6 +66,9 @@ path: '/posts/:id'
 // dev default path
 defaultPath: '/posts/5'
 
+// component custom props
+props: {...}
+
 // global component
 // same as component
 global: {

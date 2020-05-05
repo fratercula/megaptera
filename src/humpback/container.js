@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from 'react'
 import { Route, withRouter } from 'react-router-dom'
 import Resizable from 're-resizable'
@@ -94,13 +95,18 @@ class R extends Component {
 
   render() {
     const { Routes, componentCreator } = this.props
-    const { name: entry, component: devtools, path } = userConfig
+    const {
+      name: entry,
+      component: devtools,
+      path,
+      props = {},
+    } = userConfig
     const EntryComponent = componentCreator(entry)
     const DevComponent = componentCreator(devtools.name)
 
     const C = () => (
       <Resize>
-        <EntryComponent />
+        <EntryComponent {...props} />
       </Resize>
     )
 

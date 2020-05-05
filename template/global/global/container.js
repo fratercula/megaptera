@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
@@ -43,11 +44,11 @@ export default class extends Component {
             <Routes>
               {
                 config.routes.map(({ path, components }) => {
-                  const routeComponent = () => components.map((name) => {
-                    const C = componentCreator(name)
+                  const routeComponent = () => components.map((item) => {
+                    const C = componentCreator(item.name || item)
                     return (
                       <div className={classes.component}>
-                        <C />
+                        <C {...item.props || {}} />
                       </div>
                     )
                   })

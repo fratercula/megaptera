@@ -28,7 +28,10 @@ var config = {
     {
       path: '/',
       name: 'index',
-      components: ['switch', 'test-name'],
+      components: ['switch', {
+        name: 'test-name',
+        props: { id: 12345 },
+      }],
     },
     {
       path: '/switch',

@@ -27,6 +27,7 @@ class X extends Component {
     dispatch: PropTypes.func.isRequired,
     store: PropTypes.object.isRequired,
     value: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
   }
 
   state = {
@@ -43,8 +44,11 @@ class X extends Component {
   }
 
   render() {
-    const { store, value } = this.props
+    const { store, value, id } = this.props
     const { message } = this.state
+
+    // custom props
+    window.console.log(id)
 
     return (
       <div className={classes.main}>

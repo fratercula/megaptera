@@ -8,6 +8,10 @@ module.exports = {
   // dev default url
   defaultPath: '/',
 
+  props: {
+    id: 12345,
+  },
+
   // webpack amd externals
   externals: [
     // {
